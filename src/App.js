@@ -96,7 +96,7 @@ class App extends Component {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                id:this.state.user.id
+                id: this.state.user.id
               })
           })
             .then(response => response.json())
@@ -135,14 +135,19 @@ class App extends Component {
         { this.state.route === 'home' 
           ? <div> 
             <Logo />
-            <Rank />
-            <ImageLinkForm onInputChange={this.onInputChange} 
-              onSubmit={this.onSubmit}/>
+            <Rank 
+              name ={this.state.user.name}
+              entries={this.state.user.entries}
+              />
+            <ImageLinkForm 
+              onInputChange={this.onInputChange} 
+              onSubmit={this.onSubmit}
+              />
             <FaceRecognition box={box} imageUrl={imageUrl} />
           </div>
          : (
-           this.state.route === "signin"
-           ? <SignIn onRouteChange={this.onRouteChange}/>
+           route === "signin"
+           ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
            : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
           )  
         }
